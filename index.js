@@ -16,7 +16,7 @@ app.use('/',forgotp)
 app.use(express.json())
 app.use('/doc',swaggerUi.serve,swaggerUi.setup(swaggerOutput))
 
-mongoose.connect(process.env.db)
+mongoose.connect(process.env.DB)
 .then(console.log('mongodb connected'))
 .catch(err=>console.log(err))
 
