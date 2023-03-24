@@ -24,7 +24,7 @@ router.post('/forgotpw',async(req,res)=>{
         result.otp=gotp
         console.log(result.otp)
         await result.save()
-        var token=jwt.sign({_id:result._id},process.env.jwtsecret)
+        var token=jwt.sign({_id:result._id},process.env.JWTSECRET)
         if (send) console.log('mail sent')
         res.json({
             token:token,
@@ -43,7 +43,7 @@ router.post('/forgotpw/verifyotp',async(req,res)=>{
             in: 'body',
             description: 'OTP',
     }  */
-    let result=jwt.verify(req.headers.authorization,process.env.jwtsecret)
+    let result=jwt.verify(req.headers.authorization,process.env.JWTSECRET)
     
     req.userdata=result
     
@@ -74,7 +74,7 @@ router.post('/forgotpw/resetpw',async(req,res)=>{
     }  */
     
     let token=req.headers.authorization
-    let user=jwt.verify(token,process.env.jwtsecret)
+    let user=jwt.verify(token,process.env.JWTSECRET)
     //console.log(user)
 
     let users=await Model.findOne({_id:user._id})
