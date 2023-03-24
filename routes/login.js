@@ -23,7 +23,7 @@ router.post('/login',async(req,res)=>{
         let pass=await bcrypt.compare(req.body.password,user.password)
         if(!pass) return res.send('invalid password')
         
-        let token=jwt.sign({_id:user._id},process.env.jwtsecret)
+        let token=jwt.sign({_id:user._id},process.env.JWTSECRET)
         if(pass){
             req.body.password=user.password
             res.json({
